@@ -27,6 +27,8 @@
   .cartao img { width:100%; aspect-ratio:1/1; object-fit:cover; display:block; cursor:zoom-in; }
   .corpo { padding:12px 14px 14px; display:flex; flex-direction:column; gap:6px; }
   .corpo h3 { margin:0; font-size:15.5px; }
+  .corpo h3 a { color:inherit; text-decoration:none; }
+  .corpo h3 a:hover { color:var(--acento); text-decoration:underline; }
   .meta { color:var(--suave); font-size:13px; }
   .selo { display:inline-block; font-size:12px; padding:2px 8px; border-radius:99px; background:#efede6; margin-right:4px; }
   .relevo { font-size:13px; padding-left:10px; border-left:3px solid var(--cinza); }
@@ -166,7 +168,7 @@ function cartaoPista(p) {
     <img src="${p.img}" loading="lazy" alt="">
     <div class="corpo">
       <div><span class="selo" style="background:${CORES[p.tipo]};color:#fff">${esc(p.tipo_txt)}</span><span class="selo">${esc(p.superficie)}</span></div>
-      <h3>${esc(p.nome)}</h3>
+      <h3><a href="${gmaps(p.lat, p.lon)}" target="_blank" rel="noopener" title="Abrir no Google Maps">${esc(p.nome)} ↗</a></h3>
       ${dist(p)}<div class="meta">Acesso: ${esc(p.acesso)}</div>
       <div class="relevo ${p.relevo_cor}">${esc(p.relevo_txt)}</div>
       <div class="nums">
@@ -208,7 +210,7 @@ function cartaoLugar(p, i) {
     <img src="${p.img}" loading="lazy" alt="">
     <div class="corpo">
       <div><span class="selo" style="background:${CORES.lugar};color:#fff">#${p.rank}</span>${p.tipos.map(t => `<span class="selo">${esc(t)}</span>`).join("")}</div>
-      <h3>${esc(p.nome)}</h3>
+      <h3><a href="${gmaps(p.lat, p.lon)}" target="_blank" rel="noopener" title="Abrir no Google Maps">${esc(p.nome)} ↗</a></h3>
       ${dist(p)}<div class="meta">${esc(p.endereco.split(",").slice(0, 4).join(","))}</div>
       <div class="relevo ${rel[0]}">${rel[1]}</div>
       <div class="nums">
